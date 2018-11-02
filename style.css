@@ -1,0 +1,122 @@
+body {
+	margin-top : 0;
+	margin-bottom : 0;
+	background-color: #fefbd8;
+}
+
+#header {
+	display: table;
+	margin-top : 0;
+	margin-bottom : 0;
+	background: #86af49; 
+	height: 200px;
+	width: 960px;
+	font-family: "Roboto", sans-serif;
+	font-size: 24px;
+	
+}
+
+#logo {
+	display: table-cell;
+	margin-top : 0;
+	vertical-align: middle;
+	text-align: center;
+	padding-bottom: 0;
+	color: white;
+}
+
+#content{
+	width: 960px; 
+	float : left;
+	height: auto;
+    background: #e3eaa7;
+    font-family: "Roboto", sans-serif; 
+}
+
+#countries img {
+	width : 30%;
+	height : 30%;
+	float : right;
+	padding-left: 15px;
+}
+
+#home section {
+	font-size : 18px;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+ h2{
+	padding-left : 0.5em;
+}
+
+#nav{
+	font-family: 'Open Sans', arial;
+	margin : 0;
+}
+
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#navbar li {
+	font-family: 'Robot', sans-serif;
+	font-size: 20px;
+    float: left;
+    width: 240px;
+}
+
+#navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+#navbar li a:hover {
+    background-color: #111;
+}
+
+#imgs {
+	white-space: nowrap;
+	
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+#info {
+	font-family: "Roboto", sans-serif;
+}
+
+#info p {
+	padding-left: 1em;
+}
+
+#content p {
+	padding-left: 1em;
+}
+
+table  { 
+	margin-left: 1em;
+
+}
+
+#info img{
+
+white-space: nowrap;
+object-fit: scale-down;
+vertical-align: middle;
+text-align: center;
+margin-left: 10px;  
+  width: 20px;
+  height: 40px;
+
+}
