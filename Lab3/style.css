@@ -1,0 +1,14 @@
+table, th, tr, td {
+	border : 1px solid black;
+	background-color: #eca1a6;
+	font-family: Arial;
+}
+
+th {
+	background-color: #d6cbd3;
+}
+
+td {
+	font-style: italic;;
+}
+

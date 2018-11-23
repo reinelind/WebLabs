@@ -1,7 +1,7 @@
-body {
+.b{
 	margin-top : 0;
 	margin-bottom : 0;
-	background-color: #fefbd8;
+	background-color: #fefbd8; 
 }
 
 #header {
@@ -73,7 +73,7 @@ body {
 #navbar li a {
     display: block;
     color: white;
-    text-align: center;
+    text-align: center ;
     padding: 14px 16px;
     text-decoration: none;
 }
