@@ -22,49 +22,60 @@
 	echo '</tr>';
 	
 	$pattern = "/(\d+.\d+.\d+)\s*\/\s*(\d+:\d+)\s*\/([\p{Cyrillic}\s*]+)/u";
+	$date_pattern = "/(\d+.\d+.\d+)\s*\//";
+	$time_pattern = "/\s*(\d+:\d+)\s*\//";
+	$text_pattern = "/\/([\p{Cyrillic}\s*]+)/u";
 	$array = new SplFixedArray (50);
 	$i = 1;
 	$filesize = filesize ($filename);
 	while (!feof($file)) {
-		
 		$line = fgets ($file, $filesize);
-		$array[$i] = 0;
-		if ($line != "\r\n"){
-			if (preg_match ($pattern, $line, $match)) {
-				if (validate_date ($match[1], $match[2] )) {
-				echo '<tr>'	;
-					echo '<td>';
-						echo $match[1];
-					echo '</td>';
-					echo '<td>';
-						echo $match[2];
-					echo '</td>';
-					echo '<td>';
-						echo $match[3];
-					echo '</td>';
-				echo '</tr>';
-			
-			} else {
-			$array[$i] = 1;
-			echo '<tr>';
-				echo '<td colspan=3>';
-					echo 'Лінія '.$i.': Невірний формат введення дати ';
-				echo '</td>';
-			echo '</tr>';
-		} 
-			
-		} else {
+		echo '<tr>';
 
-			echo '<tr>';
-				echo '<td colspan=3>';
-					echo 'Лінія '.$i.' : Такої дати не існує';
+		if (preg_match ($date_pattern, $line, $date_match) 
+			&& validate_date($date_match[1])) {
+			echo '<td>';
+				echo $date_match[1];
+			echo '</td>';
+		}
+			else {
+				echo '<td>';
+					echo 'Помилка при введені дати';
 				echo '</td>';
+			}
+		if (preg_match($time_pattern, $line, $time_match)
+			&& validate_time($time_match[1])) {
+			echo '<td>';
+				echo $time_match[1];
+			echo '</td>';
+		}
+		  else{
+		  	echo '<td>';
+					echo 'Помилка при введені часу';
+				echo '</td>';
+			}
+			echo '<td>';
+				preg_match($pattern,$line, $match);
+				echo $match[3];
+			echo '</td>';
 			echo '</tr>';
-		}
-
-		}
-		$i+=1;
-	} 
+	}
+				
+			// if (preg_match ($pattern, $line, $match)) {
+				// if (validate_date ($match[1], $match[2] )) {
+				// echo '<tr>'	;
+				// 	echo '<td>';
+				// 		echo $match[1];
+				// 	echo '</td>';
+				// 	echo '<td>';
+				// 		echo $match[2];
+				// 	echo '</td>';
+				// 	echo '<td>';
+				// 		echo $match[3];
+				// 	echo '</td>';
+				// echo '</tr>';
+			
+	
 	fclose($file);
 echo '</table>';
 
