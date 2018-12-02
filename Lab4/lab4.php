@@ -1,71 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Lab 4</title>
-	<style type="text/css">
-	body {
-		font-family: Roboto;
-	}
-</style>
+	<title></title>
 </head>
-
-
-	
-	
-<body>
-	<form action = "<?php $_PHP_SELF ?>" method = "GET">
-		
-		<input type = "submit"  name = "button" value = "Go to" action = "route.php" >
-		<input type = "submit"  name = "button" value = "Root" action = "route.php">
-		<input type = "submit"  name = "button" value = "Home" action = "route.php">
-		Path: <input type = "text" name = "path" value=<?php @$_GET['path']?> />
-<?php
-require_once ('route.php');
-
-	if ($handle = @opendir($_GET['path'])) {
-
-		echo '<table border = "1">';
-		while (false !== ($entry = readdir($handle))) {
-			echo '<tr>';
-			if ($entry != "." && $entry != ".." ) {
-				echo '<td>';
-				echo $entry;
-				echo '</td>';
-				$file = $_GET['path']."\\".$entry;
-
-				if (is_file($file)) {
-					echo '<td>';
-					echo (filesize($file));
-					echo '</td>';
-					echo '<td>';
-					echo "F";
-					echo '</td>';
-				}
-				else { 
-					echo '<td> </td>';
-					echo '<td>';
-					echo "D";
-					echo '</td>';
-				}
-
-			}
-			echo '</tr>';
-		}
-		echo '</table>';
-		closedir($handle);
-	} 
-	else {
-		echo 'Такого каталогу не існує';
-	}
-
-	?>
-
-		
+<body style="font-family: Arial;">
+	<form method="GET" action = "<?php $_PHP_SELF ?>">
+		<input type = "text" name = "path">
+		<input type = "submit" />
 	</form>
+	<table border = "1">
+<?php
+	require_once ('route.php');
+	if ( isset($_GET['path']))
+		if (is_dir ($_GET['path'])) {
+			$descriptor = opendir ($_GET['path']);
+			while (($element = readdir ($descriptor)) !== false){
+				echo '<tr>';
+				if (is_dir ($_GET['path'].'/'.$element))
+					echo "<td> D </td>";
+				else 
+					echo "<td> F </td>";
+				$path = $_GET['path'];
+				$url = rawurlencode("$path/$element");
+				if ($element == '.'){
+					$element = 'Root';
+					$url = substr($path, 0, 3);
+					echo "<td> <a href = lab4.php?path=$url> $element </a> </td>";
+				}
+				elseif ($element == '..')
+				{
+					$element = 'Up';
+					echo "<td> <a href = lab4.php?path=$url> $element </a> </td>";
+				} else
+				echo "<td> <a href = lab4.php?path=$url> $element </a> </td>";
+				if (is_file ($_GET['path'].'/'.$element))
+					echo '<td>'.FileSizeConvert (filesize($_GET['path'].'/'.$element)).'</td>';
+				echo '</tr>';
+			}
+		}
+		else 
+			echo '<p> Такого каталогу не існує </p>'; 
+?>
 
-	
-
+</table>
 
 </body>
 </html>
